@@ -1,11 +1,11 @@
 package agent
 
-import (
-	"testing"
+// import (
+// 	"testing"
 
-	openApiSdkClient "github.com/bytedance/douyin-openapi-sdk-go/client"
-)
+// 	openApiSdkClient "github.com/bytedance/douyin-openapi-sdk-go/client"
+// )
 
-func TestXxx(t *testing.T) {
-	println(openApiSdkClient.UserItemResponse{})
-}
+// func TestXxx(t *testing.T) {
+// 	println(openApiSdkClient.UserItemResponse{})
+// }
