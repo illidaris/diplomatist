@@ -1,0 +1,13 @@
+package vao
+
+// NONE=0
+// TEXT=1
+// PIC=2
+// GIF=3
+// VIDEO=4
+// PIC_LIST=5
+// STORY=11
+// VR=12
+// FORWARD=21
+// STORY_LIVE=22
+// STORY_PIC=23
