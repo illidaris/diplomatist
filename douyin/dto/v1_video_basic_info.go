@@ -23,13 +23,3 @@ type V1VideoBasicInfoResult struct {
 	BaseResult
 	List []*VideoBasicInfo `json:"list"`
 }
-
-type VideoBasicInfo struct {
-	Cover       string `json:"cover"`        // 视频封面
-	CreateTime  int64  `json:"create_time"`  // 视频创建时间戳
-	ItemId      string `json:"item_id"`      // 视频id
-	MediaType   int    `json:"media_type"`   // 媒体类型。2:图集;4:视频
-	Title       string `json:"title"`        // 视频标题
-	VideoId     string `json:"video_id"`     // 视频真实id
-	VideoStatus int    `json:"video_status"` // 视频状态
-}
