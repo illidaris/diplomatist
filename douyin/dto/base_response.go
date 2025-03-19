@@ -2,31 +2,28 @@ package dto
 
 import (
 	"fmt"
-	"net/url"
 
 	"github.com/illidaris/diplomatist/douyin/vao"
-	restSender "github.com/illidaris/rest/sender"
 )
 
-type IBaseRequest interface {
-	GetOptions() []restSender.Option
-	Path() string
+type BaseResponse[T any] struct {
+	Data  *T         `json:"data"`
+	Extra *BaseExtra `json:"extra"`
 }
 
-type BaseRequest struct {
-	AccessToken string `json:"-" form:"-" url:"-"` // 抖音视频开放平台颁发的access_token
-}
-
-func (r BaseRequest) GetOptions() []restSender.Option {
-	return []restSender.Option{
-		restSender.WithHeader(vao.HEADER_ACCESS_TOKEN, r.AccessToken),
+func (r BaseResponse[T]) Error() error {
+	if r.Extra != nil && r.Extra.Error() != nil {
+		return r.Extra.Error()
 	}
-}
-
-func (r BaseRequest) GetUrlQuery() url.Values {
-	values := url.Values{}
-	values.Set("access_token", r.AccessToken)
-	return values
+	if r.Data == nil {
+		return vao.ErrResponseNil
+	}
+	if errData, ok := any(r.Data).(IErorResponse); ok {
+		if errData.Error() != nil {
+			return errData.Error()
+		}
+	}
+	return nil
 }
 
 type BaseExtra struct {
@@ -43,7 +40,7 @@ type BaseResult struct {
 }
 
 func (b BaseResult) Error() error {
-	if b.ErrorCode != 0 {
+	if b.ErrorCode == 0 {
 		return nil
 	}
 	return fmt.Errorf("%s[%d]%s", vao.NAME, b.ErrorCode, b.Description)
