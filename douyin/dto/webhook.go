@@ -6,8 +6,8 @@ import (
 )
 
 type WebhookRequest struct {
-	MsgId      string `json:"msg_id"`
-	Signature  string `json:"signature"`
+	MsgId      string `json:"-"`
+	Signature  string `json:"-"`
 	Event      string `json:"event"`
 	ClientKey  string `json:"client_key"`
 	FromUserId string `json:"from_user_id"`
