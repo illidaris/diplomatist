@@ -19,6 +19,15 @@ type DebugVerifyMsg struct {
 	Challenge int64 `json:"challenge"`
 }
 
+type CreateVideoMsg struct {
+	ItemId  string `json:"item_id"`  // 创建的视频id
+	ShareId string `json:"share_id"` // 标识分享的share_id
+}
+
+type AuthorizeMsg struct {
+	Scopes []string `json:"scopes"` // 授权scope列表
+}
+
 // DebugVerifyResponse 调试验证响应
 type DebugVerifyResponse struct {
 	DebugVerifyMsg
