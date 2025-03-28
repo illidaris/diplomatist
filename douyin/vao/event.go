@@ -15,11 +15,12 @@ const (
 	EventEnterGroupAuditChange       //	im.group_fans.create_list 	用户加群申请
 	EventGroupFansEvent              //	im.group_fans.create_list 	用户加群成功
 	EventContractauthorize           //	无	用户给应用经营关系（scope名为xxx.bind，或私信相关能力）授权
-	Eventcontractunauthorize         //	无	用户解除应用经营关系（scope名为xxx.bind，或私信相关能力）授权
+	EventContractunauthorize         //	无	用户解除应用经营关系（scope名为xxx.bind，或私信相关能力）授权
 	EventNewVideoDigg                //	user.intention	接收用户点赞事件
 	EventNewFollowAction             //	user.intention	接收用户关注事件
 	EventUnionAuthInfoForC           //	unionauth.identification	联合授权完成后，对c端应用进行授权信息通知
 	EventUnionAuthInfoForB           //	unionauth.identification	联合授权完成后，对b端应用进行授权信息通知
+	EventVerifyWebhook               // 验证webhook
 )
 
 var StringEventMap = map[string]Event{
@@ -34,9 +35,10 @@ var StringEventMap = map[string]Event{
 	"enter_group_audit_change": EventEnterGroupAuditChange,
 	"group_fans_event":         EventGroupFansEvent,
 	"contract_authorize":       EventContractauthorize,
-	"contract_unauthorize":     Eventcontractunauthorize,
+	"contract_unauthorize":     EventContractunauthorize,
 	"new_video_digg":           EventNewVideoDigg,
 	"new_follow_action":        EventNewFollowAction,
 	"union_auth_info_for_c":    EventUnionAuthInfoForC,
 	"union_auth_info_for_b":    EventUnionAuthInfoForB,
+	"verify_webhook":           EventVerifyWebhook,
 }
