@@ -42,3 +42,23 @@ var StringEventMap = map[string]Event{
 	"union_auth_info_for_b":    EventUnionAuthInfoForB,
 	"verify_webhook":           EventVerifyWebhook,
 }
+
+var EventStringMap = map[Event]string{
+	EventCreateVideo:           "create_video",
+	EventAuthorize:             "authorize",
+	EventUnauthorize:           "unauthorize",
+	EventImReceiveMsg:          "im_receive_msg",
+	EventImSendMsg:             "im_send_msg",
+	EventImEnterDirectMsg:      "im_enter_direct_msg",
+	EventImGroupReceiveMsg:     "im_group_receive_msg",
+	EventImGroupSendMsg:        "im_group_send_msg",
+	EventEnterGroupAuditChange: "enter_group_audit_change",
+	EventGroupFansEvent:        "group_fans_event",
+	EventContractauthorize:     "contract_authorize",
+	EventContractunauthorize:   "contract_unauthorize",
+	EventNewVideoDigg:          "new_video_digg",
+	EventNewFollowAction:       "new_follow_action",
+	EventUnionAuthInfoForC:     "union_auth_info_for_c",
+	EventUnionAuthInfoForB:     "union_auth_info_for_b",
+	EventVerifyWebhook:         "verify_webhook",
+}
