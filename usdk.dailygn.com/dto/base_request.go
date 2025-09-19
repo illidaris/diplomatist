@@ -3,7 +3,7 @@ package dto
 import (
 	"crypto/sha256"
 	"fmt"
-	"net/http"
+	"net/url"
 	"time"
 
 	restSender "github.com/illidaris/rest/sender"
@@ -13,7 +13,7 @@ import (
 
 type IRequest interface {
 	restSender.IRequest
-	GetSigns(method, path string) string
+	GetSigns(method, path string, query url.Values) string
 }
 
 type BaseRequest struct {
@@ -27,7 +27,7 @@ type BaseRequest struct {
 	Body      string `json:"-" form:"-" url:"-"`
 }
 
-func (r *BaseRequest) GetSigns(method, path string) string {
+func (r *BaseRequest) GetSigns(method, path string, query url.Values) string {
 	if r.Ts == 0 {
 		r.Ts = time.Now().UnixMilli()
 	}
@@ -41,15 +41,16 @@ func (r *BaseRequest) GetSigns(method, path string) string {
 		r.Alg = "HMAC-SHA256"
 	}
 	path = "/" + path
+	if len(query) > 0 {
+		path += "?" + query.Encode()
+	}
 	words := []string{
 		method,
 		path,
 		cast.ToString(r.Ts),
 		r.Nonce,
 	}
-	if method != http.MethodGet || len(r.Body) > 0 {
-		words = append(words, r.Body)
-	}
+	words = append(words, r.Body)
 	r.Sign = HashMac(sha256.New, r.AppSecret, words...)
 	res := fmt.Sprintf("appid=\"%s\",v=\"%s\",alg=\"%s\",nonce=\"%s\",timestamp=\"%s\",signature=\"%s\"",
 		r.AppId,

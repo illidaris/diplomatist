@@ -17,7 +17,7 @@ func SignInvoke(ctx context.Context, req dto.IRequest, host string) error {
 	if host == "" {
 		host = defaultHost
 	}
-	v := req.GetSigns(req.GetMethod(), req.GetAction())
+	v := req.GetSigns(req.GetMethod(), req.GetAction(), req.GetUrlQuery())
 	s := restSender.NewSender(
 		restSender.WithTimeout(time.Second*20),
 		restSender.WithHeader("x-game-sign", v),

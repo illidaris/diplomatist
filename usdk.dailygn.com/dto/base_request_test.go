@@ -11,7 +11,7 @@ func TestGetSign(t *testing.T) {
 		Body:      `{"key":"value"}`,
 	}
 	right := "+gZLQ2PN5xezyDHVcjNVQWE4qQVEc+6pLQ4uOEFsfvs="
-	v := b.GetSigns("POST", "webcast/gamecp/attribute/channel/upload_test_payment_summary")
+	v := b.GetSigns("POST", "webcast/gamecp/attribute/channel/upload_test_payment_summary", nil)
 	println(v)
 	if b.Sign != right {
 		t.Error("faild")
